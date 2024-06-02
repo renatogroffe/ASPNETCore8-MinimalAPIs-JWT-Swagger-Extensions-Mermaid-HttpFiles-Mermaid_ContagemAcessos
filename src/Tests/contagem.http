@@ -1,0 +1,28 @@
+# Mais informacoes em:
+# https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+
+@baseUrl=http://localhost:5242
+@user=usr01_apis
+@password=Usr01ApiValido01!
+
+###
+
+# @name autenticar
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+  "userID": "{{user}}",
+  "password": "{{password}}"
+}
+
+###
+
+@token = {{autenticar.response.body.$.accessToken}}
+
+###
+
+# @name consumir
+GET {{baseUrl}}/contador
+Authorization: Bearer {{token}}
+Accept: application/json
