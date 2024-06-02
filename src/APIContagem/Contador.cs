@@ -26,4 +26,9 @@ public class Contador
     {
         _valorAtual++;
     }
+
+    public void Decrementar()
+    {
+        _valorAtual--;
+    }
 }

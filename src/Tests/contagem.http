@@ -26,3 +26,10 @@ Content-Type: application/json
 GET {{baseUrl}}/contador
 Authorization: Bearer {{token}}
 Accept: application/json
+
+###
+
+# @name decrementar
+GET {{baseUrl}}/contador/decrementar
+Authorization: Bearer {{token}}
+Accept: application/json

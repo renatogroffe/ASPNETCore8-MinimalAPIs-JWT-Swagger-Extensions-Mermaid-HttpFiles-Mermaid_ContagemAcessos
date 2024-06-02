@@ -79,6 +79,30 @@ app.MapGet("/contador", (Contador contador) =>
   .WithOpenApi()
   .RequireAuthorization();
 
+app.MapGet("/contador/decrementar", (Contador contador) =>
+{
+    int valorAtualContador;
+    lock (contador)
+    {
+        contador.Decrementar();
+        valorAtualContador = contador.ValorAtual;
+    }
+    app.Logger.LogInformation($"Contador (Decrementar) - Valor atual: {valorAtualContador}");
+
+    return TypedResults.Ok(new ResultadoContador()
+    {
+        ValorAtual = contador.ValorAtual,
+        Local = contador.Local,
+        Kernel = contador.Kernel,
+        Framework = contador.Framework,
+        Mensagem = app.Configuration["Saudacao"]
+    });
+}).Produces<ResultadoContador>()
+  .Produces(StatusCodes.Status401Unauthorized)
+  .WithOpenApi()
+  .RequireAuthorization();
+
+
 app.MapPost("/login", (User usuario, AccessManager accessManager) =>
 {
     app.Logger.LogInformation($"Recebida solicitacao para o usuario: {usuario?.UserID}");

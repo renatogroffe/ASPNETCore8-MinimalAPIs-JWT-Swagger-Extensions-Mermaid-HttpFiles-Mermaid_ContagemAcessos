@@ -28,3 +28,11 @@ curl -X 'GET' \
   '{{baseUrl}}/contador' \
   -H 'accept: application/json' \
   -H 'Authorization: Bearer {{token}}'
+
+###
+
+# @name decrementar
+curl -X 'GET' \
+  'http://localhost:5242/contador/decrementar' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer {{token}}'
